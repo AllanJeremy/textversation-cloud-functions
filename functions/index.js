@@ -22,7 +22,7 @@ exports.fiveMinuteSchedule = functions.pubsub
 
 // Daily
 exports.dailySchedule = functions.pubsub
-  .schedule("every 1 mins")
+  .schedule("0 0 * * *")
   .timeZone(DEFAULT_TIME_ZONE)
   .onRun(context => {
     updateUserNicknames();

@@ -14,7 +14,7 @@ let updateUserNicknames = async () => {
   let users = await userCollectionRef.get();
 
   // No users found ~ no need to proceed and make any API requests
-  if (users.empty) return false;
+  if (!users.size) return false;
 
   //* Users found ~ proceed to update nicknames
   let requestData = {};
