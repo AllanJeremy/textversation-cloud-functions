@@ -3,18 +3,17 @@ const dateUtil = require("./utils/dateUtil");
 const chatThreadCollectionRef = db.collection("chatThreads");
 
 // Time after which we should remove the chat in minutes
-const TIME_TO_REMOVE_MINUTES = 1; /* 24 * 60 */ // One day
+const TIME_TO_REMOVE_MINUTES = 24 * 60; // One day
 
 let removeExpiredChats = async () => {
   // Only select active chat threads to save on reads ~ no need to read deactivated chats
-  let chatThreads = chatThreadCollectionRef.where("isActive", "==", true).get();
-  console.debug("removing expired chats");
-  if (chatThreads.empty) return false;
-  console.info(chatThreads);
+  let chatThreads = await chatThreadCollectionRef
+    .where("isActive", "==", true)
+    .get();
+
+  if (!chatThreads.size) return false;
 
   let batch = db.batch();
-
-  console.debug("started removing");
   // Chats exist
   chatThreads.docs.map(chatSnapshot => {
     let chat = chatSnapshot.data();
@@ -28,8 +27,8 @@ let removeExpiredChats = async () => {
 
     return chat;
   });
-
-  return batch.commit();
+  batch.commit();
+  return true;
 };
 
 module.exports = removeExpiredChats;
