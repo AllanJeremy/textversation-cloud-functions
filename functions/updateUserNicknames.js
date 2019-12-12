@@ -19,7 +19,13 @@ let updateUserNicknames = async () => {
   //* Users found ~ proceed to update nicknames
   let requestData = {};
 
-  requestData.data = users.docs.map(doc => doc.id); // An array of ids
+  requestData.data = users.docs.map(doc => {
+    let data = doc.data();
+    return {
+      id: doc.id,
+      gender: data.gender
+    };
+  }); // An array of ids
 
   return new Promise((resolve, reject) => {
     axios
