@@ -25,7 +25,7 @@ let updateUserNicknames = async () => {
       id: doc.id,
       gender: data.gender
     };
-  }); // An array of ids
+  }); // An array of ids & genders
 
   return new Promise((resolve, reject) => {
     axios
