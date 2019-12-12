@@ -1,0 +1,16 @@
+{
+  "name": "textversation-cfn",
+  "version": "1.0.0",
+  "description": "Textversation cloud functions",
+  "main": "functions/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firebase",
+    "cloud",
+    "functions"
+  ],
+  "author": "Allan Jeremy",
+  "license": "ISC"
+}
